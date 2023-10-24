@@ -1,0 +1,25 @@
+indicator_belongs_to_news_threshold: 0.7                # The probability threshold above which the given indicator is
+                                                        # considered to be detected for given news. Min 0.0, max 1.0.
+
+news_are_relevant_threshold: 0.0                        # The model assesses if given news are "relevant to ESG".
+                                                        # Note that I've found this to best be disabled (0.0). This
+                                                        # threshold defines when news should be considered relevant.
+                                                        # Min 0.0, max 1.0.
+
+cycle_time_delta: 60                                    # Time delta (in seconds) until a new analysis cycle should be
+                                                        # started. Only starts if the prior one hasn't finished.
+
+use_entire_news_articles_instead_of_headlines: false    # Currently used sentiment model was trained on headlines, not
+                                                        # on full article texts. Enabling it is therefore not advised.
+                                                        # Enabling this with already existing db leads to both headlines
+                                                        # and full articles in the "article" attribute.
+
+threads_for_news_search: 100                            # Enters company keyword with each thread into news search in
+                                                        # "parallel". Can decrease time to scrape news.
+
+use_cuda: false                                         # Only enable if CUDA GPU is available and PyTorch CUDA version
+                                                        # is installed.
+
+vram_gb_per_analysis_multiprocess: 2                    # If CUDA is enabled, the analysis will be split into multiple
+                                                        # processes, using VRAM as a heuristic for optimal processes
+                                                        # count, i.e. for 2 GB: 6 GB / 2 GB = 3 processes.

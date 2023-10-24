@@ -1,0 +1,11 @@
+torch~=2.1.0
+fastapi~=0.101.1
+pydantic~=2.2.1
+transformers~=4.31.0
+uvicorn~=0.23.2
+SQLAlchemy~=2.0.20
+gnews~=0.3.1
+nltk~=3.8.1
+flair~=0.12.2
+PyYAML~=6.0.1
+newspaper3k
