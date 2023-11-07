@@ -69,12 +69,11 @@ class SustainabilityCategoryClassification:
 
         # Map probabilities to labels using id2label
         label_mapping = model.config.id2label
-        probabilities = results[0]  # Assuming results is the output tensor you provided
+        probabilities = results[0]
 
-        # Create a list to store label-probability pairs
         label_probabilities = [(label_mapping[i], prob.item()) for i, prob in enumerate(probabilities)]
 
-        # Sort the label-probability pairs by probability in descending order
+        # Sort the list in descending order using the given probability
         label_probabilities.sort(key=lambda x: x[1], reverse=True)
 
         class_probabilities = [[], []]

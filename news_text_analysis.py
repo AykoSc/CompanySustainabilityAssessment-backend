@@ -13,7 +13,7 @@ from gnews import GNews
 
 from data_classes import NewsTextAnalysisResult
 from database.news_analysis_DAO import NewsAnalysisDAO
-from exceptions import NoRelevantCompaniesInNewsTextException, LabelNotFoundException
+from exceptions import LabelNotFoundException
 from indicators import Indicators
 from logger import logger
 from models.company_recognition import CompanyClassifier
@@ -119,22 +119,18 @@ def analyze_api_news_for_each_company() -> None:
 
     # Use multiprocessing to perform analysis faster.
     received_news_list = [received_news.get() for _ in range(received_news.qsize())]
-    try:
-        optimal_processes_amount = 1
-        if config["use_cuda"]:
-            memory_per_process_gb = 3
-            gpu_memory_gb = _get_gpu_memory_gb()
-            if gpu_memory_gb > 0:
-                # Heuristic for the optimal number of processes. May not be optimal for all systems.
-                optimal_processes_amount = max(int(gpu_memory_gb / config["vram_gb_per_analysis_multiprocess"]), 1)
-                logger.info(f"GPU Arbeitsspeicher: {gpu_memory_gb} GB")
-                logger.info(f"Erstelle {optimal_processes_amount} Analyseprozesse")
-            else:
-                logger.info("Konnte kein CUDA-fähiges Gerät erkenne. Nutze CPU.")
-        with multiprocessing.Pool(processes=optimal_processes_amount) as pool:
-            pool.map(analyze_news_text, received_news_list)
-    except NoRelevantCompaniesInNewsTextException as e:
-        logger.warning(f"Überspringe Nachrichtenartikel: {e.args[0]}")
+    optimal_processes_amount = 1
+    if config["use_cuda"]:
+        gpu_memory_gb = _get_gpu_memory_gb()
+        if gpu_memory_gb > 0:
+            # Heuristic for the optimal number of processes. May not be optimal for all systems.
+            optimal_processes_amount = max(int(gpu_memory_gb / config["vram_gb_per_analysis_multiprocess"]), 1)
+            logger.info(f"GPU Arbeitsspeicher: {gpu_memory_gb} GB")
+            logger.info(f"Erstelle {optimal_processes_amount} Analyseprozesse")
+        else:
+            logger.info("Konnte kein CUDA-fähiges Gerät erkenne. Nutze CPU.")
+    with multiprocessing.Pool(processes=optimal_processes_amount) as pool:
+        pool.map(analyze_news_text, received_news_list)
     # Alternative in case multiprocessing is to be fully removed:
     #
     # while not received_news.empty():
@@ -196,7 +192,7 @@ def add_full_article_to_news_item(news_item: dict[str, Any]) -> None:
         news_item["article"] = article.text
 
 
-def analyze_news_text(news: dict[str, Any]) -> NewsTextAnalysisResult:
+def analyze_news_text(news: dict[str, Any]) -> NewsTextAnalysisResult | None:
     """
     Handles the analysis of a given news item.
     First, it recognizes all companies (saved in the db) in the article.
@@ -215,8 +211,9 @@ def analyze_news_text(news: dict[str, Any]) -> NewsTextAnalysisResult:
     recognized_company_names = CompanyClassifier.recognize_companies(news_text)
 
     if len(recognized_company_names) == 0:
-        raise NoRelevantCompaniesInNewsTextException(
-            "Es muss mindestens ein Unternehmen im Nachrichtenartikel vorkommen.")
+        logger.warning("Überspringe Nachrichtenartikel: "
+                       "Es muss mindestens ein Unternehmen im Nachrichtenartikel vorkommen.")
+        return None
 
     output += "\nIm Text genannte Unternehmen sind:"
     for recognized_company_name in recognized_company_names:

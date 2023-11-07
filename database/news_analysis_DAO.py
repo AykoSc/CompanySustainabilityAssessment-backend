@@ -315,7 +315,6 @@ class NewsAnalysisDAO:
                            News.relevancy_score >= NewsAnalysisDAO._config["news_are_relevant_threshold"],
                            News.date >= from_date
                            ).one()
-
                 return (
                     query_result.min_sentiment,
                     query_result.avg_sentiment,
@@ -402,10 +401,15 @@ class NewsAnalysisDAO:
             finally:
                 session.close()
 
-    def create_sustainability_indicator(self, sustainability_indicator_name: str) -> Optional[SustainabilityIndicator]:
+    def create_sustainability_indicator(self,
+                                        sustainability_indicator_name:
+                                        str) \
+            -> Optional[SustainabilityIndicator]:
         with Session(self._engine) as session:
             try:
-                new_indicator = SustainabilityIndicator(name=sustainability_indicator_name)
+                new_indicator = SustainabilityIndicator(
+                    name=sustainability_indicator_name
+                )
                 session.add(new_indicator)
                 session.commit()
                 return new_indicator

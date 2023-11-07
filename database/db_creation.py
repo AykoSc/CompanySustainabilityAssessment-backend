@@ -10,6 +10,7 @@ from sqlalchemy import create_engine, ForeignKey, Engine, event, CheckConstraint
 from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 
 CASCADE_ALL_DELETE = "all, delete"
+CONSTRAINT_NOT_EMPTY_STRING = "<> ''"
 
 
 @event.listens_for(Engine, "connect")
@@ -38,7 +39,7 @@ class Company(Base):
     news: Mapped["Contains"] = relationship(cascade=CASCADE_ALL_DELETE)
 
     __table_args__ = (
-        CheckConstraint("name <> ''"),
+        CheckConstraint(f"name {CONSTRAINT_NOT_EMPTY_STRING}"),
     )
 
 
@@ -48,7 +49,7 @@ class Synonym(Base):
     name: Mapped[str] = mapped_column(primary_key=True, index=True)
 
     __table_args__ = (
-        CheckConstraint("name <> ''"),
+        CheckConstraint(f"name {CONSTRAINT_NOT_EMPTY_STRING}"),
     )
 
 
@@ -66,9 +67,9 @@ class News(Base):
     companies: Mapped["Contains"] = relationship(cascade=CASCADE_ALL_DELETE)
 
     __table_args__ = (
-        CheckConstraint("title <> ''"),
-        CheckConstraint("text <> ''"),
-        CheckConstraint("link <> ''")
+        CheckConstraint(f"title {CONSTRAINT_NOT_EMPTY_STRING}"),
+        CheckConstraint(f"text {CONSTRAINT_NOT_EMPTY_STRING}"),
+        CheckConstraint(f"link {CONSTRAINT_NOT_EMPTY_STRING}")
     )
 
 
@@ -79,7 +80,7 @@ class SustainabilityIndicator(Base):
     news_indicators: Mapped["NewsIndicator"] = relationship(cascade=CASCADE_ALL_DELETE)
 
     __table_args__ = (
-        CheckConstraint("name <> ''"),
+        CheckConstraint(f"name {CONSTRAINT_NOT_EMPTY_STRING}"),
     )
 
 

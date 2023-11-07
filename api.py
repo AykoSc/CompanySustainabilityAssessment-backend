@@ -150,8 +150,8 @@ def synonym_does_not_exist(company_name: str, synonym_name: str):
 
 def none_to_error(func):
     """
-    If the database returns None (aka no results), the API sends an HTTP exception with 404 code and
-    an explanation instead.
+    If the database returns None (aka no results), the API sends an HTTP exception with 404 code and an explanation
+    instead.
     """
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -173,11 +173,13 @@ def do_news_exist(company_name: str, date_range: str, max_sentiment: float, indi
     does_exist(company_name=company_name, date_range=date_range)
     if not indicator_name:
         return dao.do_news_exist_by_company_and_date_range(company_name, date_ranges[date_range], max_sentiment)
-    return dao.do_news_exist_by_company_indicator_and_date_range(company_name, date_ranges[date_range], indicator_name,                                                          max_sentiment)
+    return dao.do_news_exist_by_company_indicator_and_date_range(company_name, date_ranges[date_range], indicator_name,
+                                                                 max_sentiment)
 
 
 @app.get("/news_minimum", response_model=Optional[News])
-def get_news_with_lowest_sentiment(company_name: str, date_range: str, indicator_name: str | None = None) -> Type[News] | None:
+def get_news_with_lowest_sentiment(company_name: str, date_range: str, indicator_name: str | None = None) \
+        -> Type[News] | None:
     does_exist(company_name=company_name, date_range=date_range)
     if not indicator_name:
         return dao.get_news_with_lowest_sentiment_by_company_and_date_range(company_name, date_ranges[date_range])

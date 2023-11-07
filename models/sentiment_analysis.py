@@ -19,10 +19,16 @@ class SentimentAnalyzer:
         :return: Sentiment in the range 0-10, with 0 being negative, 5 neutral, and 10 positive.
         """
         # Use Huggingface model
-        tokenizer = AutoTokenizer.from_pretrained(SentimentAnalyzer.MODEL_HUGGINGFACE_URL)
+        tokenizer = (AutoTokenizer.
+                     from_pretrained(SentimentAnalyzer.
+                                     MODEL_HUGGINGFACE_URL))
         model = AutoModelForSequenceClassification.from_pretrained(SentimentAnalyzer.MODEL_HUGGINGFACE_URL)
 
-        tokens = tokenizer(text, padding=True, truncation=True, return_tensors="pt", max_length=512)
+        tokens = tokenizer(text,
+                           padding=True,
+                           truncation=True,
+                           return_tensors="pt",
+                           max_length=512)
 
         outputs = model(**tokens)
 
@@ -48,5 +54,5 @@ class SentimentAnalyzer:
 
         rating = (probabilities[0] * positive_weight +
                   probabilities[1] * negative_weight +
-                  probabilities[2] * neutral_weight) / sum(probabilities)
+                  probabilities[2] * neutral_weight)
         return rating

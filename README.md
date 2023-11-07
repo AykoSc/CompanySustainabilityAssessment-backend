@@ -30,7 +30,7 @@ This backend is used to periodically (and therefore independently) search for ne
 
 Several optimisations were carried out, among others: News articles that already exist, are re-examined for relevant companies (if new ones have been added), but not analysed again using resource-intensive AI.
 
-#### Beispiel-Analyse
+#### Example analysis
 
 **Analyzed news article:** Microsoft extends security log retention following State Department ... - Cybersecurity Dive
 
@@ -253,83 +253,83 @@ The REST API is made available with FastAPI. The following functions exist:
     </tr>
     <tr>
         <td>/companies</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/do_news_exist</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10003; &ast;</td>
-        <td>&#10007;</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓ *</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/news_minimum</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10007</td>
-        <td>&#10003; &ast;</td>
-        <td>&#10007;</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✗</td>
+        <td>✓ *</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/news</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10003; &ast;</td>
-        <td>&#10007;</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓ *</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/sustainability_indicators</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/indicator_stats</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10003;</td>
-        <td>&#10003; &ast;</td>
-        <td>&#10007;</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓ *</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/companies (POST)</td>
-        <td>&#10003;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
+        <td>✓</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/synonyms (POST)</td>
-        <td>&#10003;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10003;</td>
+        <td>✓</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✓</td>
     </tr>
     <tr>
         <td>/companies (DELETE)</td>
-        <td>&#10003;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
+        <td>✓</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
     </tr>
     <tr>
         <td>/synonyms (DELETE)</td>
-        <td>&#10003;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10007;</td>
-        <td>&#10003;</td>
+        <td>✓</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✗</td>
+        <td>✓</td>
     </tr>
 </table>
 

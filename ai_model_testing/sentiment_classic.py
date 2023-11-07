@@ -27,7 +27,7 @@ class SentimentAnalyzer:
 
         rating = (probabilities[0] * positive_weight +
                   probabilities[1] * negative_weight +
-                  probabilities[2] * neutral_weight) / sum(probabilities)
+                  probabilities[2] * neutral_weight)
         return rating
 
     @staticmethod
@@ -38,7 +38,7 @@ class SentimentAnalyzer:
         :param huggingface_url: The URL on huggingface where the model lies at
         :return: Sentiment in the range 0-10, with 0 being negative, 5 neutral, and 10 positive.
         """
-        # Nutze Model von Huggingface
+        # Use model from Hugging Face
         tokenizer = AutoTokenizer.from_pretrained(huggingface_url)
         model = AutoModelForSequenceClassification.from_pretrained(huggingface_url)
 
@@ -173,10 +173,6 @@ if __name__ == "__main__":
     output = "\nErfolgte Analyse:"
     for text in news_headlines:
         output = f"Text: {text:<50}"
-        output += (f"\n    Twitter: "
-                   f"{SentimentAnalyzer.analyze_sentiment(text, SentimentAnalyzer.MODEL_HUGGINGFACE_URL_TWITTER)}")
-        output += (f"\n    Generic: "
-                   f"{SentimentAnalyzer.analyze_sentiment(text, SentimentAnalyzer.MODEL_HUGGINGFACE_URL_GENERIC)}")
         output += (f"\n    Finbert: "
                    f"{SentimentAnalyzer.analyze_sentiment(text, SentimentAnalyzer.MODEL_HUGGINGFACE_URL_FINBERT)}")
 
