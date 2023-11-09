@@ -84,21 +84,24 @@ class Indicators(Enum):
     """
     # SDGs by the United Nations
     
-    NO_POVERTY = "No poverty"
-    ZERO_HUNGER = "Zero hunger"
-    GOOD_HEALTH = "Good health and well-being"
+    NO_POVERTY = "No poverty"  # Supply Chain (Social), Supply Chain (Economic / Governance), Economic Crime
+    ZERO_HUNGER = "Zero hunger"  # Supply Chain (Social), Supply Chain (Economic / Governance), Economic Crime
+    GOOD_HEALTH = "Good health and well-being"  # Communities Health and Safety, Employee Health and Safety
     QUALITY_EDUCATION = "Quality education"
-    GENDER_EQUALITY = "Gender equality"
-    CLEAN_WATER = "Clean water and sanitation"
-    CLEAN_ENERGY = "Affordable and clean energy"
-    ECONOMIC_GROWTH = "Decent work and economic growth"
-    INFRASTRUCTURE = "Industry, innovation and infrastructure"
-    REDUCED_INEQUALITY = "Reduced inequality"
-    SUSTAINABLE_CITIES = "Sustainable cities and communities"
-    RESPONSIBLE_CONSUMPTION = "Responsible consumption and production"
-    CLIMATE_ACTION = "Climate action"
-    LIFE_BELOW_WATER = "Life below water"
-    LIFE_ON_LAND = "Life on land"
-    STRONG_INSTITUTIONS = "Peace, justice and strong institutions"
+    GENDER_EQUALITY = "Gender equality"  # Discrimination
+    CLEAN_WATER = "Clean water and sanitation"  # Soil and Groundwater Impact, Wastewater Management, 
+                                                  Surface Water Pollution
+    CLEAN_ENERGY = "Affordable and clean energy"  # Energy Efficiency and Renewable
+    ECONOMIC_GROWTH = "Decent work and economic growth"  # Economic Crime
+    INFRASTRUCTURE = "Industry, innovation and infrastructure"  # Strategy Implementation
+    REDUCED_INEQUALITY = "Reduced inequality"  # Discrimination
+    SUSTAINABLE_CITIES = "Sustainable cities and communities"  # Planning Limitations
+    RESPONSIBLE_CONSUMPTION = "Responsible consumption and production"  # Product Safety and Quality
+    CLIMATE_ACTION = "Climate action"  # Climate Risks, Emergencies (Environmental)
+    LIFE_BELOW_WATER = "Life below water"  # Soil and Groundwater Impact, Surface Water Pollution, Animal Welfare, 
+                                             Biodiversity
+    LIFE_ON_LAND = "Life on land"  # Animal Welfare, Physical Impacts, Biodiversity
+    STRONG_INSTITUTIONS = "Peace, justice and strong institutions"  # Legal Proceedings & Law Violations
     # PARTNERSHIP = "Partnership for the goals"
+    
     """

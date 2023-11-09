@@ -2,6 +2,7 @@
 This script can be used to compare different models for sentiment analysis.
 Some pre-existing news headlines exist already, as well as URLs to three popular models on huggingface.
 """
+import time
 
 from torch.nn import Softmax
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -13,7 +14,7 @@ class SentimentAnalyzer:
     MODEL_HUGGINGFACE_URL_FINBERT = "ProsusAI/finbert"
 
     @staticmethod
-    def convert_to_rating_positive_negative_neutral(probabilities: list[float]) -> float:
+    def convert_to_rating(probabilities: list[float]) -> float:
         """
         Converts a 3-point sentiment (positive, negative, neutral) into a sentiment rating from 0 to 10,
         where 0 is negative, 5 is neutral, and 10 is positive.
@@ -51,7 +52,7 @@ class SentimentAnalyzer:
         softmax = Softmax(dim=1)
         probabilities = softmax(logits)[0].tolist()
 
-        return SentimentAnalyzer.convert_to_rating_positive_negative_neutral(probabilities)
+        return SentimentAnalyzer.convert_to_rating(probabilities)
 
 
 if __name__ == "__main__":

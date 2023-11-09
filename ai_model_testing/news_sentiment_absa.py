@@ -8,5 +8,5 @@ from NewsSentiment import TargetSentimentClassifier
 
 tsc = TargetSentimentClassifier()
 
-sentiment = tsc.infer_from_text("", "Volkswagen", " has received  over faked emission tests.")
+sentiment = tsc.infer_from_text("", "Volkswagen", " has received backlash over faked emission tests.")
 print(sentiment[0])

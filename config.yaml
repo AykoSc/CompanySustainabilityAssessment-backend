@@ -9,8 +9,8 @@ news_are_relevant_threshold: 0.0                        # The model assesses if 
 cycle_time_delta: 60                                    # Time delta (in seconds) until a new analysis cycle should be
                                                         # started. Only starts if the prior one hasn't finished.
 
-use_entire_news_articles_instead_of_headlines: false    # Currently used sentiment model was trained on headlines, not
-                                                        # on full article texts. Enabling it is therefore not advised.
+use_entire_news_articles_instead_of_headlines: false    # Using entire articles leads to considerably longer time to
+                                                        # obtain news due to needing to scrape the full text.
                                                         # Enabling this with already existing db leads to both headlines
                                                         # and full articles in the "article" attribute.
 
